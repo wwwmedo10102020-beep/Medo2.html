@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حكايتنا ❤️</title>
+    <style>
+        /* تصميم CSS */
+        :root {
+            --primary-pink: #ff4d6d;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 2s;
+        }
+
+        h1 { color: var(--primary-pink); font-size: 2.2rem; margin-bottom: 5px; }
+        header p { color: #888; font-size: 0.9rem; }
+
+        /* العداد الزمني */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .time-box {
+            background: var(--card-bg);
+            padding: 15px 5px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #222;
+            transition: 0.3s;
+        }
+
+        .time-box:hover { border-color: var(--primary-pink); }
+        .time-box span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--primary-pink); }
+        .time-box p { margin: 5px 0 0; font-size: 0.75rem; color: #aaa; }
+
+        /* الرسائل */
+        .messages { margin-bottom: 30px; }
+        .msg-card {
+            background: linear-gradient(90deg, #ff4d6d, #c9184a);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+        }
+
+        /* الصور */
+        .gallery img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #222;
+        }
+
+        /* الخطاب الختامي */
+        .letter {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px dashed var(--primary-pink);
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* حركات الانيميشن */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* قلوب تتساقط في الخلفية */
+        .heart {
+            position: fixed;
+            color: var(--primary-pink);
+            font-size: 15px;
+            user-select: none;
+            z-index: -1;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(100vh); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>حكايتنا ❤️</h1>
+            <p>كل لحظة معاكي هي عمر جديد</p>
+        </header>
+
+        <section class="timer-section">
+            <h4 style="text-align: center; color: #eee;">منذ أن بدأت القصة</h4>
+            <div class="timer-grid" id="timer">
+                <div class="time-box"><span id="years">0</span><p>سنة</p></div>
+                <div class="time-box"><span id="months">0</span><p>شهر</p></div>
+                <div class="time-box"><span id="days">0</span><p>يوم</p></div>
+                <div class="time-box"><span id="hours">0</span><p>ساعة</p></div>
+                <div class="time-box"><span id="minutes">0</span><p>دقيقة</p></div>
+                <div class="time-box"><span id="seconds">0</span><p>ثانية</p></div>
+            </div>
+        </section>
+
+        <section class="messages">
+            <div class="msg-card">💍 هفضل سندك في كل وقت</div>
+            <div class="msg-card">🛡️ هكون دايماً أمانك وضحكتك</div>
+            <div class="msg-card">♾️ حبنا ملوش نهاية.. وعد</div>
+        </section>
+
+        <section class="gallery">
+            <img src="https://via.placeholder.com/400x500/161616/ff4d6d?text=Photo+1" alt="Our Memory">
+            <img src="https://via.placeholder.com/400x300/161616/ff4d6d?text=Photo+2" alt="Our Memory">
+        </section>
+
+        <footer class="letter">
+            <h3 style="color: var(--primary-pink); text-align: center;">ملكة قلبي.. ❤️</h3>
+            حبيبتي "حبيبة"، عايز أقولك إن كل كلمة كتبتها هنا هي جزء صغير جداً من اللي حاسه بيكي. أنتي مش بس حبيبتي، أنتي بنتي وصاحبتي وأماني. هفضل دايماً جنبك، وحبنا هيكبر كل يوم أكتر من اللي قبله. ربنا يخليكي ليا يا أغلى من عمري.
+            <br><br>
+            <center><b>بحبك يا "حبيبة".. للأبد ❤️</b></center>
+        </footer>
+    </div>
+
+    <script>
+        // 1. إعداد تاريخ البداية (سنة، شهر-1، يوم)
+        // مثال: 15 مايو 2022
+        const startDate = new Date('2022-05-15T00:00:00');
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const s = Math.floor(diff / 1000) % 60;
+            const m = Math.floor(diff / (1000 * 60)) % 60;
+            const h = Math.floor(diff / (1000 * 60 * 60)) % 24;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24)) % 30;
+            const mon = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44)) % 12;
+            const y = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+
+            document.getElementById('years').innerText = y;
+            document.getElementById('months').innerText = mon;
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h;
+            document.getElementById('minutes').innerText = m;
+            document.getElementById('seconds').innerText = s;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // 2. تأثير تساقط القلوب
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
