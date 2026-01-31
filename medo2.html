@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>حكايتنا ❤️</title>
+    <title>دودو &ميدو ❤️</title>
     <style>
         :root { --pink: #ff4d6d; --bg: #0d0d0d; --card: #161616; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
 
         /* شاشة الدخول */
         #login { position: fixed; inset: 0; background: #000; z-index: 1000; display: flex; align-items: center; justify-content: center; transition: 0.8s; }
-        .login-card { width: 85%; max-width: 350px; background: #0a0a0a; padding: 30px; border-radius: 30px; border: 1px solid #222; text-align: center; }
-        input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; border-radius: 15px; color: white; text-align: center; margin: 20px 0; outline: none; }
-        .btn-enter { width: 100%; padding: 15px; background: var(--pink); border: none; border-radius: 15px; color: white; font-weight: bold; cursor: pointer; }
+        .login-card { width: 85%; max-width: 350px; background: #0a0a0a; padding: 30px; border-radius: 30px; border: 1px solid #222; text-align: center; box-shadow: 0 0 20px rgba(255, 77, 109, 0.2); }
+        input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; border-radius: 15px; color: white; text-align: center; margin: 20px 0; outline: none; font-size: 1rem; }
+        .btn-enter { width: 100%; padding: 15px; background: var(--pink); border: none; border-radius: 15px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
 
         /* المحتوى الرئيسي */
-        #main { display: none; padding: 15px; }
+        #main { display: none; padding: 15px; animation: fadeIn 1.5s; }
         header { text-align: center; margin-bottom: 30px; }
-        header h1 { font-size: 2.5rem; color: var(--pink); margin: 0; }
+        header h1 { font-size: 2.2rem; color: var(--pink); margin: 0; text-shadow: 0 0 10px rgba(255, 77, 109, 0.4); }
 
         /* العداد */
         .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
@@ -25,50 +25,56 @@
         .t-box span { display: block; font-size: 1.6rem; font-weight: bold; color: var(--pink); }
         .t-box p { margin: 5px 0 0; font-size: 0.7rem; color: #888; }
 
-        /* المربعات التفاعلية بالرموز الجديدة */
+        /* المربعات التفاعلية */
         .icon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
-        .icon-box { background: var(--card); height: 110px; border-radius: 25px; border: 1px solid #222; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; overflow: hidden; cursor: pointer; }
-        .msg-overlay { position: absolute; inset: 0; background: var(--pink); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 10px; text-align: center; opacity: 0; transition: 0.3s; font-weight: bold; }
+        .icon-box { background: var(--card); height: 110px; border-radius: 25px; border: 1px solid #222; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; overflow: hidden; cursor: pointer; transition: 0.3s; }
+        .msg-overlay { position: absolute; inset: 0; background: var(--pink); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 10px; text-align: center; opacity: 0; transition: 0.4s; font-weight: bold; }
         .icon-box.active .msg-overlay { opacity: 1; }
 
-        /* معرض الفيديوهات */
-        .media-item { background: var(--card); border-radius: 25px; border: 1px solid #222; padding: 12px; margin-bottom: 25px; text-align: center; }
-        .media-item video { width: 100%; border-radius: 20px; display: block; }
-        .media-caption { padding: 12px 0; font-size: 1rem; color: #fff; border-top: 1px solid #333; margin-top: 10px; }
+        /* معرض الميديا */
+        .media-feed { display: flex; flex-direction: column; gap: 20px; }
+        .media-item { background: var(--card); border-radius: 25px; border: 1px solid #222; padding: 12px; text-align: center; }
+        .media-item video, .media-item img { width: 100%; border-radius: 20px; display: block; }
+        .media-caption { padding: 15px 5px; font-size: 1rem; color: #fff; border-top: 1px solid #333; margin-top: 10px; line-height: 1.4; }
 
         /* زر الكشف الأخير */
-        .reveal-btn { background: #1a1a1a; padding: 20px; border-radius: 20px; border: 2px dashed var(--pink); color: white; text-align: center; cursor: pointer; margin: 30px 0; font-weight: bold; }
-        #final-letter { display: none; background: #000; padding: 30px; border-radius: 25px; border: 2px solid var(--pink); margin: 30px 0 60px; line-height: 1.8; text-align: center; animation: fadeIn 1s; }
+        .reveal-btn { background: #1a1a1a; padding: 20px; border-radius: 20px; border: 2px dashed var(--pink); color: white; text-align: center; cursor: pointer; margin: 30px 0; font-weight: bold; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+        
+        #final-letter { display: none; background: #000; padding: 30px; border-radius: 25px; border: 2px solid var(--pink); margin: 30px 0 60px; line-height: 2; text-align: center; animation: slideIn 1s; }
 
+        /* القلوب */
         .heart { position: fixed; top: -20px; color: var(--pink); z-index: -1; animation: fall linear infinite; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <audio id="audio" loop>
-        <source src="https://www.mboxdrive.com/Tamer-Hosny-Nour-Einy.mp3" type="audio/mpeg">
+    <audio id="background-audio" loop preload="auto">
+        <source src="https://l.top4top.io/m_3683u9e581.mp3" type="audio/mpeg">
     </audio>
 
     <div id="login">
         <div class="login-card">
-            <h2 style="color:var(--pink)">مصطفى & حبيبه</h2>
-            <p>انتي لسه هتفكري انجزي 😂</p>
-            <input type="number" id="pin" placeholder="اكتبي (1) هنا">
-            <button class="btn-enter" onclick="startApp()">دخول ❤️</button>
+            <h2 style="color:var(--pink)">دودو & ميدو</h2>
+            <p>انتي لسه هتفكري انجزي.. حليها 😂</p>
+            <input type="number" id="pin" placeholder="فكري وليكي بوسه">
+            <button class="btn-enter" onclick="startApp()">افتحي قلبي ❤️</button>
         </div>
     </div>
 
     <div id="main">
         <header>
-            <h1>حكايتنا ❤️</h1>
+            <h1>هنفضل  ❤️</h1>
+            <p style="color:#666; font-size: 0.9rem;">إلى الأبد ومع بعض دايماً</p>
         </header>
 
         <div class="timer-grid">
-            <div class="t-box"><span id="y">3</span><p>سنة</p></div>
+            <div class="t-box"><span id="y">0</span><p>سنة</p></div>
             <div class="t-box"><span id="mon">0</span><p>شهر</p></div>
-            <div class="t-box"><span id="d">2</span><p>يوم</p></div>
+            <div class="t-box"><span id="d">0</span><p>يوم</p></div>
             <div class="t-box"><span id="h">0</span><p>ساعة</p></div>
             <div class="t-box"><span id="m">0</span><p>دقيقة</p></div>
             <div class="t-box"><span id="s">0</span><p>ثانية</p></div>
@@ -84,17 +90,57 @@
         <div class="media-feed">
             <div class="media-item">
                 <video id="v1" loop muted playsinline>
-                    <source src="رابط_الفيديو_الأول.mp4" type="video/mp4">
+                    <source src="رابط_فيديو_1.mp4" type="video/mp4">
                 </video>
-                <div class="media-caption">لحظاتنا اللي مابتتنسيش ✨</div>
+                <div class="media-caption">لحظاتنا اللي مابتتنسيش أبداً ✨</div>
             </div>
 
             <div class="media-item">
-                <video id="v2" loop muted playsinline>
-                    <source src="رابط_الفيديو_الثاني.mp4" type="video/mp4">
-                </video>
-                <div class="media-caption">ضحكتك هي جنة الدنيا بالنسبة لي ❤️</div>
+                <img src="https://l.top4top.io/p_3683bhj301.jpg" alt="صورتنا">
+                <div class="media-caption">اجمل لحظه ف حياتنا ❤️</div>
             </div>
+
+            <div class="media-item">
+                <img src="https://c.top4top.io/p_3683vu5rf1.jpg" alt="صورتنا">
+                <div class="media-caption">ومين قال الملاك مبيضحكش ❤️</div>
+            </div>
+
+            <div class="media-item">
+                <img src="https://l.top4top.io/p_3683jehtu1.jpg" alt="صورتنا">
+                <div class="media-caption">انا عايش ليكي وبيكي ❤️</div>
+            </div>
+
+            <div class="media-item">
+                <img src="https://b.top4top.io/p_3683fapoj1.jpg" alt="صورتنا">
+                <div class="media-caption">حتي لو وصفتلك مش هعرف اقول كله ❤️</div>
+            </div>
+            
+            <div class="media-item">
+                <img src="https://a.top4top.io/p_3683895jg1.jpg" alt="صورتنا">
+                <div class="media-caption">مش بحبك من قليل ❤️</div>
+            </div>
+            
+            <div class="media-item">
+                <img src="https://a.top4top.io/p_3683luxl61.jpg" alt="صورتنا">
+                <div class="media-caption">فاكره دي صح ❤️</div>
+            </div>
+            
+            <div class="media-item">
+                <img src="https://f.top4top.io/p_3683fzlc21.jpg" alt="صورتنا">
+                <div class="media-caption">يوم ميتعوضش ❤️</div>
+            </div>
+            
+            <div class="media-item">
+                <img src="https://d.top4top.io/p_3683edjcm1.jpg" alt="صورتنا">
+                <div class="media-caption">الحضن الحنين رزق والله</div> ❤️</div>
+            </div>
+            
+            <div class="media-item">
+                <img src="https://h.top4top.io/p_3683tb8v21.jpg" alt="صورتنا">
+                <div class="media-caption">اول خروجه عسوله معاكي ❤️</div>
+            </div>
+            
+            
         </div>
 
         <div class="reveal-btn" id="revealBtn" onclick="revealLetter()">
@@ -103,25 +149,33 @@
 
         <div id="final-letter">
             <h3 style="color:var(--pink)">إلى ملكة قلبي "حبيبة" ❤️</h3>
-            عايز أقولك إن وجودك في حياتي هو أكبر نعمة من ربنا.. أنتي مش بس حبيبتي، أنتي أماني وسكني. هفضل دايماً جنبك وسندك. بحبك للأبد.
+            عايز أقولك إن وجودك في حياتي هو أكبر نعمة من ربنا.. أنتي مش بس حبيبتي، أنتي أماني وسكني وبنتي. هفضل دايماً جنبك وسندك في كل حاجة ومهما حصل هفضل احبك ولو رجع بيا الزمن مش هختار غيرك وبيكي اكتفيت وعاوز اكمل عمري بيكي يا نجمة من السما ووقعت في قلبي نورته، بعشقك يا بسكويتة قلبي وعمري ما هبطل احبك ابداً.
+            <br><br>
+            <b style="font-size:1.3rem;">بحبك للأبد يا أغلى من حياتي ❤️</b>
         </div>
+        
     </div>
 
     <script>
         function startApp() {
-            if(document.getElementById('pin').value === "1") {
+            const pin = document.getElementById('pin').value;
+            if(pin === "762002") {
                 document.getElementById('login').style.transform = "translateY(-100%)";
                 document.getElementById('main').style.display = "block";
                 
-                // تشغيل الأغنية والفيديوهات تلقائياً
-                document.getElementById('audio').play();
+                const audio = document.getElementById('background-audio');
+                audio.volume = 1.0;
+                audio.play().catch(e => console.log("Audio error:", e));
+
                 const videos = document.querySelectorAll('video');
                 videos.forEach(v => {
                     v.play();
-                    v.muted = false; // إلغاء كتم الصوت بعد التفاعل
+                    v.muted = false;
                 });
-                
+
                 setInterval(createHeart, 300);
+            } else {
+                alert("فكري صح 😂❤️");
             }
         }
 
@@ -131,9 +185,12 @@
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
-        const startDay = new Date('2021-01-29T00:00:00'); 
+        const startDay = new Date('2019-12-07T00:00:00'); 
+
         function updateTimer() {
-            const diff = new Date() - startDay;
+            const now = new Date();
+            const diff = now - startDay;
+
             document.getElementById('y').innerText = Math.floor(diff / 31536000000);
             document.getElementById('mon').innerText = Math.floor((diff % 31536000000) / 2628000000);
             document.getElementById('d').innerText = Math.floor((diff % 2628000000) / 86400000);
@@ -147,6 +204,7 @@
             const h = document.createElement('div');
             h.className = 'heart'; h.innerHTML = '❤️';
             h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = (Math.random() * 20 + 10) + 'px';
             h.style.animationDuration = (Math.random() * 3 + 2) + 's';
             document.body.appendChild(h);
             setTimeout(() => h.remove(), 5000);
