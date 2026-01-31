@@ -3,186 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حكايتنا ❤️</title>
+    <title>مصطفى & حبيبه | Our Eternal Love Story</title>
     <style>
-        /* تصميم CSS */
         :root {
-            --primary-pink: #ff4d6d;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
+            --pink: #ff4d6d;
+            --dark-bg: #0d0d0d;
+            --card-gray: #1a1a1a;
         }
 
-        body {
+        body, html {
+            margin: 0; padding: 0;
             background-color: var(--dark-bg);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 450px;
-            width: 100%;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeIn 2s;
-        }
-
-        h1 { color: var(--primary-pink); font-size: 2.2rem; margin-bottom: 5px; }
-        header p { color: #888; font-size: 0.9rem; }
-
-        /* العداد الزمني */
-        .timer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .time-box {
-            background: var(--card-bg);
-            padding: 15px 5px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-
-        .time-box:hover { border-color: var(--primary-pink); }
-        .time-box span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--primary-pink); }
-        .time-box p { margin: 5px 0 0; font-size: 0.75rem; color: #aaa; }
-
-        /* الرسائل */
-        .messages { margin-bottom: 30px; }
-        .msg-card {
-            background: linear-gradient(90deg, #ff4d6d, #c9184a);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
-        }
-
-        /* الصور */
-        .gallery img {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 15px;
-            border: 2px solid #222;
-        }
-
-        /* الخطاب الختامي */
-        .letter {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 20px;
-            border: 1px dashed var(--primary-pink);
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        /* حركات الانيميشن */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* قلوب تتساقط في الخلفية */
-        .heart {
+        /* شاشة الدخول (Login Screen) */
+        #login-screen {
             position: fixed;
-            color: var(--primary-pink);
-            font-size: 15px;
-            user-select: none;
-            z-index: -1;
-            animation: fall linear forwards;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #222 0%, #000 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 999; transition: 0.8s ease-in-out;
         }
-        @keyframes fall { to { transform: translateY(100vh); opacity: 0; } }
+
+        .login-card {
+            background: #111;
+            padding: 40px 20px;
+            border-radius: 25px;
+            border: 1px solid #333;
+            text-align: center;
+            width: 80%; max-width: 350px;
+        }
+
+        .login-card h2 { font-size: 1.8rem; margin-bottom: 5px; }
+        .login-card p { color: #888; font-size: 0.8rem; margin-bottom: 25px; }
+
+        input {
+            width: 80%; padding: 12px;
+            border-radius: 10px; border: 1px solid #333;
+            background: #000; color: white; text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .btn-enter {
+            background: var(--pink); color: white;
+            border: none; padding: 12px 30px;
+            border-radius: 25px; cursor: pointer; font-weight: bold;
+        }
+
+        /* الموقع الرئيسي */
+        #main-content { display: none; padding: 20px; text-align: center; }
+
+        .header-title { font-size: 2.2rem; color: var(--pink); margin-top: 20px; }
+        .sub-title { color: #888; margin-bottom: 30px; }
+
+        /* العداد */
+        .timer-container {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 15px; margin-bottom: 30px;
+        }
+
+        .timer-box {
+            background: var(--card-gray);
+            padding: 15px 5px; border-radius: 15px;
+            border: 1px solid #222;
+        }
+
+        .timer-box span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--pink); }
+        .timer-box p { margin: 5px 0 0; font-size: 0.7rem; color: #666; }
+
+        /* مشغل الموسيقى الصغير */
+        .music-player {
+            background: #1a1a1a; padding: 10px;
+            border-radius: 10px; display: inline-flex;
+            align-items: center; gap: 10px; margin-bottom: 30px;
+        }
+
+        /* البطاقات الملونة */
+        .msg-grid {
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .msg-btn {
+            background: var(--card-gray); padding: 15px;
+            border-radius: 15px; width: 45%; font-size: 0.8rem;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #222;
+        }
+
+        .msg-btn.active { background: var(--pink); }
+
+        /* معرض الصور المتسلسل */
+        .photo-feed img {
+            width: 100%; border-radius: 20px;
+            margin-bottom: 15px; border: 1px solid #333;
+        }
+
+        .photo-caption {
+            font-size: 1.1rem; margin-bottom: 25px;
+        }
+
+        /* الخلفية المتحركة */
+        .heart-fall {
+            position: fixed; top: -10%; color: var(--pink);
+            z-index: -1; animation: fall linear infinite;
+        }
+        @keyframes fall { to { transform: translateY(110vh); } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>حكايتنا ❤️</h1>
-            <p>كل لحظة معاكي هي عمر جديد</p>
-        </header>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
 
-        <section class="timer-section">
-            <h4 style="text-align: center; color: #eee;">منذ أن بدأت القصة</h4>
-            <div class="timer-grid" id="timer">
-                <div class="time-box"><span id="years">0</span><p>سنة</p></div>
-                <div class="time-box"><span id="months">0</span><p>شهر</p></div>
-                <div class="time-box"><span id="days">0</span><p>يوم</p></div>
-                <div class="time-box"><span id="hours">0</span><p>ساعة</p></div>
-                <div class="time-box"><span id="minutes">0</span><p>دقيقة</p></div>
-                <div class="time-box"><span id="seconds">0</span><p>ثانية</p></div>
-            </div>
-        </section>
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>مصطفى & حبيبه</h2>
+            <p>✨ OUR ETERNAL LOVE STORY</p>
+            <input type="number" id="pin-input" placeholder="انتي لسه هتفكري انجزي">
+            <button class="btn-enter" onclick="checkPin()">دوسي هنا 😂</button>
+        </div>
+    </div>
 
-        <section class="messages">
-            <div class="msg-card">💍 هفضل سندك في كل وقت</div>
-            <div class="msg-card">🛡️ هكون دايماً أمانك وضحكتك</div>
-            <div class="msg-card">♾️ حبنا ملوش نهاية.. وعد</div>
-        </section>
+    <div id="main-content">
+        <h1 class="header-title">حكايتنا ❤️</h1>
+        <p class="sub-title">كل لحظة معاكي هي عمر جديد</p>
 
-        <section class="gallery">
-            <img src="https://via.placeholder.com/400x500/161616/ff4d6d?text=Photo+1" alt="Our Memory">
-            <img src="https://via.placeholder.com/400x300/161616/ff4d6d?text=Photo+2" alt="Our Memory">
-        </section>
+        <p style="font-size: 0.9rem;">منذ أن بدأت القصة</p>
+        <div class="timer-container">
+            <div class="timer-box"><span id="y">3</span><p>سنة</p></div>
+            <div class="timer-box"><span id="mon">0</span><p>شهر</p></div>
+            <div class="timer-box"><span id="d">2</span><p>يوم</p></div>
+            <div class="timer-box"><span id="h">7</span><p>ساعة</p></div>
+            <div class="timer-box"><span id="m">35</span><p>دقيقة</p></div>
+            <div class="timer-box"><span id="s">13</span><p>ثانية</p></div>
+        </div>
 
-        <footer class="letter">
-            <h3 style="color: var(--primary-pink); text-align: center;">ملكة قلبي.. ❤️</h3>
-            حبيبتي "حبيبة"، عايز أقولك إن كل كلمة كتبتها هنا هي جزء صغير جداً من اللي حاسه بيكي. أنتي مش بس حبيبتي، أنتي بنتي وصاحبتي وأماني. هفضل دايماً جنبك، وحبنا هيكبر كل يوم أكتر من اللي قبله. ربنا يخليكي ليا يا أغلى من عمري.
-            <br><br>
-            <center><b>بحبك يا "حبيبة".. للأبد ❤️</b></center>
-        </footer>
+        <div class="music-player">
+            <span>🎵 نور عيني - الأغنية اللي بتوصفنا</span>
+        </div>
+
+        <div class="msg-grid">
+            <div class="msg-btn">🤝 هفضل سندك في كل وقت</div>
+            <div class="msg-btn">🛡️ هكون دايماً أمانك وضحكتك</div>
+            <div class="msg-btn">♾️ حبنا ملوش نهاية.. وعد</div>
+            <div class="msg-btn active">❤️ إنتي أجمل نعمة في حياتي</div>
+        </div>
+
+        <div class="photo-feed">
+            <p class="photo-caption">أحلى صدفة في عمري ❤️</p>
+            <img src="https://via.placeholder.com/400x400/111/ff4d6d?text=Your+Photo+1" alt="">
+            <p class="photo-caption">ضحكتك هي حياتي ✨</p>
+            <img src="https://via.placeholder.com/400x400/111/ff4d6d?text=Your+Photo+2" alt="">
+            <p class="photo-caption">عالمي الخاص بيكي 💍</p>
+            <img src="https://via.placeholder.com/400x400/111/ff4d6d?text=Your+Photo+3" alt="">
+        </div>
+
+        <div style="background: #111; padding: 25px; border-radius: 20px; border: 1px dashed var(--pink); margin-top: 30px;">
+            <h2 style="color: var(--pink);">ملكة قلبي.. ❤️</h2>
+            <p style="line-height: 1.8; font-size: 0.95rem;">
+                حبيبتي "حبيبة".. عايز أقولك إن كل كلمة كتبتها هنا وكل صورة حطيتها هي جزء صغير من اللي حاسه بيكي.. أنتي مش بس حبيبتي، أنتي بنتي وصاحبتي وأماني. هفضل دايماً جنبك.
+            </p>
+            <p><b>بحبك يا حبيبة.. للأبد ❤️</b></p>
+        </div>
     </div>
 
     <script>
-        // 1. إعداد تاريخ البداية (سنة، شهر-1، يوم)
-        // مثال: 15 مايو 2022
-        const startDate = new Date('2022-05-15T00:00:00');
+        // دالة الدخول
+        function checkPin() {
+            const pin = document.getElementById('pin-input').value;
+            if(pin == "1") {
+                document.getElementById('login-screen').style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById('login-screen').style.display = "none";
+                    document.getElementById('main-content').style.display = "block";
+                    document.getElementById('bg-music').play();
+                    startHearts();
+                }, 800);
+            } else {
+                alert("اكتبي رقم 1 زي ما مكتوب في الواتساب! 😂");
+            }
+        }
+
+        // عداد الوقت (مبني على تاريخ افتراضي كما في الفيديو)
+        const startDate = new Date('2021-01-29T07:45:00'); 
 
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
 
-            const s = Math.floor(diff / 1000) % 60;
-            const m = Math.floor(diff / (1000 * 60)) % 60;
-            const h = Math.floor(diff / (1000 * 60 * 60)) % 24;
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24)) % 30;
-            const mon = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44)) % 12;
-            const y = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-
-            document.getElementById('years').innerText = y;
-            document.getElementById('months').innerText = mon;
-            document.getElementById('days').innerText = d;
-            document.getElementById('hours').innerText = h;
-            document.getElementById('minutes').innerText = m;
-            document.getElementById('seconds').innerText = s;
+            document.getElementById('y').innerText = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            document.getElementById('mon').innerText = Math.floor((diff / (1000 * 60 * 60 * 24 * 30.44)) % 12);
+            document.getElementById('d').innerText = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
+            document.getElementById('h').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('m').innerText = Math.floor((diff / (1000 * 60)) % 60);
+            document.getElementById('s').innerText = Math.floor((diff / 1000) % 60);
         }
-
         setInterval(updateTimer, 1000);
-        updateTimer();
 
-        // 2. تأثير تساقط القلوب
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 5000);
+        // قلوب تتساقط
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-fall');
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                heart.style.opacity = Math.random();
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 400);
         }
-        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
